@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <title>Document</title>
+</head>
+<body>
+    <div class="main__container">
+        <div class="label" onclick="loadMinesweeper()">
+            <img src="images/minesweeper-logo.webp" alt="">
+            <p class="label__name">Minesweeper</p>
+        </div>
+        <div class="label" onclick="load2048()">
+            <img src="images/2048-logo.png" alt="">
+            <p class="label__name">2048</p>
+        </div>
+        <div class="label" onclick="loadChess()">
+            <img src="images/chess-logo.png" alt="">
+            <p class="label__name">Chess</p>
+        </div>
+        <div class="label" onclick="loadSollitaire()">
+            <img src="images/sollitaire-logo.png" alt="">
+            <p class="label__name">Sollitaire</p>
+        </div>
+        <div class="label" onclick="loadLumberjack()">
+            <img src="images/lumberjack-logo.png" alt="">
+            <p class="label__name">Lumberjack</p>
+        </div>
+    </div>
+    <div class="main__footer">
+        <div class="start__button">
+            <img src="images/w95-logo.png" alt="" class="start__logo">
+            <p class="bold__font">Start</p>
+        </div>
+        <div class="footer__content">
+
+        </div>
+        <div class="footer__clock">
+            <p id="clock"></p>
+        </div>
+    </div>
+    
+    <div id="draggable-window" style="display: none;"></div>
+
+    <div class="minesweeper__container game__container" id="minesweeper" style="display: none;">
+        <div class="minesweeper__header program__header">
+            <img src="images/minesweeper-logo.webp" alt="">
+            <p>Minesweeper</p>
+            <button onclick="closeMinesweeper()"><p>x</p></button>
+        </div>
+        <ul class="minesweeper__info program__info">
+            <li id="minesweeper-game-menu" class="program__game--menu"><u>G</u>ame</li>
+            <ul id="ms-game-menu-active" class="program__game--menu--active">
+                <li onclick="minesweeperRestartGame()"><img src="images/checkmark.png" alt="" style="visibility: hidden;"><u>N</u>ew</li>
+                <div class="list__separator"></div>
+                <li onclick="createGameField(+this.dataset.msSize);" data-ms-size="64"><img src="images/checkmark.png" class="ms-complexity-menu"><u>B</u>eginner</li>
+                <li onclick="createGameField(+this.dataset.msSize);" data-ms-size="256"><img src="images/checkmark.png" class="ms-complexity-menu" style="visibility: hidden;"><u>I</u>ntermediate</li>
+                <li onclick="createGameField(+this.dataset.msSize);" data-ms-size="480"><img src="images/checkmark.png" class="ms-complexity-menu" style="visibility: hidden;"><u>E</u>xpert</li>
+                <!-- <li><img src="images/checkmark.png" alt="" style="visibility: hidden;"><u>C</u>ustom...</li> -->
+                <div class="list__separator"></div>
+                <!-- <li><img src="images/checkmark.png" alt=""><u>M</u>arks (?)</li>
+                <li><img src="images/checkmark.png" alt="">Co<u>l</u>or</li>
+                <div class="list__separator"></div>
+                <li><img src="images/checkmark.png" alt="">Best <u>T</u>imes...</li>
+                <div class="list__separator"></div> -->
+                <li onclick="closeMinesweeper()"><img src="images/checkmark.png" alt="" style="visibility: hidden;">E<u>x</u>it</li>
+            </ul>
+            <li id="minesweeper-info-menu"><u>H</u>elp</li>
+        </ul>
+        <div class="minesweeper__field">
+            <div class="minesweeper__interface">
+                <p class="minesweeper__mines--count led--count" id="minesweeper-mines-count">010</p>
+                <button class="minesweeper__restart--button" onclick="minesweeperRestartGame()" id="minesweeper-restart-button"></button>
+                <p class="minesweeper__timer led--count" id="minesweeper-timer">000</p>
+            </div>
+            <div class="minesweeper__game minesweeper__small--field" id="minesweeper-game">
+            </div>
+        </div>
+    </div>
+    <div class="g2048__container game__container" id="g2048" style="display: none;">
+        <div class="g2048__header program__header">
+            <img src="images/2048-logo.png" alt="">
+            <p>2048</p>
+            <button onclick="close2048()"><p>x</p></button>
+        </div>
+        <ul class="g2048__info program__info">
+            <li id="g2048-game-menu" class="program__game--menu"><u>G</u>ame</li>
+            <ul id="g2048-game-menu-active" class="program__game--menu--active">
+                <li onclick="minesweeperRestartGame()"><img src="images/checkmark.png" alt="" style="visibility: hidden;"><u>N</u>ew</li>
+                <div class="list__separator"></div>
+                <li onclick="createGameField(+this.dataset.msSize);" data-ms-size="64"><img src="images/checkmark.png" class="ms-complexity-menu"><u>B</u>eginner</li>
+                <li onclick="createGameField(+this.dataset.msSize);" data-ms-size="256"><img src="images/checkmark.png" class="ms-complexity-menu" style="visibility: hidden;"><u>I</u>ntermediate</li>
+                <li onclick="createGameField(+this.dataset.msSize);" data-ms-size="480"><img src="images/checkmark.png" class="ms-complexity-menu" style="visibility: hidden;"><u>E</u>xpert</li>
+                <!-- <li><img src="images/checkmark.png" alt="" style="visibility: hidden;"><u>C</u>ustom...</li> -->
+                <div class="list__separator"></div>
+                <!-- <li><img src="images/checkmark.png" alt=""><u>M</u>arks (?)</li>
+                <li><img src="images/checkmark.png" alt="">Co<u>l</u>or</li>
+                <div class="list__separator"></div>
+                <li><img src="images/checkmark.png" alt="">Best <u>T</u>imes...</li>
+                <div class="list__separator"></div> -->
+                <li onclick="closeMinesweeper()"><img src="images/checkmark.png" alt="" style="visibility: hidden;">E<u>x</u>it</li>
+            </ul>
+            <li id="g2048-info-menu" class="program__help--menu"><u>H</u>elp</li>
+        </ul>
+        <div class="g2048__field">
+            <div class="g2048__game" id="g2048-game">
+            </div>
+            <div class="g2048__interface">
+                <ul>
+                    <li id="score-2048">Score: 0</li>
+                    <li>Time: 0</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="chess__container game__container" id="chess" style="display: none;">
+        <div class="chess__header program__header">
+            <img src="images/chess-logo.png" alt="">
+            <p>Chess</p>
+            <button onclick="closeChess()"><p>x</p></button>
+        </div>
+        <ul class="g2048__info program__info">
+            <li id="g2048-game-menu" class="program__game--menu"><u>G</u>ame</li>
+            <ul id="g2048-game-menu-active" class="program__game--menu--active">
+                <li onclick="minesweeperRestartGame()"><img src="images/checkmark.png" alt="" style="visibility: hidden;"><u>N</u>ew</li>
+                <div class="list__separator"></div>
+                <li onclick="createGameField(+this.dataset.msSize);" data-ms-size="64"><img src="images/checkmark.png" class="ms-complexity-menu"><u>B</u>eginner</li>
+                <li onclick="createGameField(+this.dataset.msSize);" data-ms-size="256"><img src="images/checkmark.png" class="ms-complexity-menu" style="visibility: hidden;"><u>I</u>ntermediate</li>
+                <li onclick="createGameField(+this.dataset.msSize);" data-ms-size="480"><img src="images/checkmark.png" class="ms-complexity-menu" style="visibility: hidden;"><u>E</u>xpert</li>
+                <!-- <li><img src="images/checkmark.png" alt="" style="visibility: hidden;"><u>C</u>ustom...</li> -->
+                <div class="list__separator"></div>
+                <!-- <li><img src="images/checkmark.png" alt=""><u>M</u>arks (?)</li>
+                <li><img src="images/checkmark.png" alt="">Co<u>l</u>or</li>
+                <div class="list__separator"></div>
+                <li><img src="images/checkmark.png" alt="">Best <u>T</u>imes...</li>
+                <div class="list__separator"></div> -->
+                <li onclick="closeMinesweeper()"><img src="images/checkmark.png" alt="" style="visibility: hidden;">E<u>x</u>it</li>
+            </ul>
+            <li id="g2048-info-menu" class="program__help--menu"><u>H</u>elp</li>
+        </ul>
+        <div class="chess__field">
+            <div class="chess__game" id="chess-game">
+                
+            </div>
+        </div>
+    </div>
+    <div class="sollitaire__container game__container" id="sollitaire" style="display: none;">
+        <div class="sollitaire__header program__header">
+            <img src="images/sollitaire-logo.png" alt="">
+            <p>Sollitaire</p>
+            <button onclick="closeSollitaire()"><p>x</p></button>
+        </div>
+        <ul class="g2048__info program__info">
+            <li id="g2048-game-menu" class="program__game--menu"><u>G</u>ame</li>
+            <ul id="g2048-game-menu-active" class="program__game--menu--active">
+                <li onclick="minesweeperRestartGame()"><img src="images/checkmark.png" alt="" style="visibility: hidden;"><u>N</u>ew</li>
+                <div class="list__separator"></div>
+                <li onclick="createGameField(+this.dataset.msSize);" data-ms-size="64"><img src="images/checkmark.png" class="ms-complexity-menu"><u>B</u>eginner</li>
+                <li onclick="createGameField(+this.dataset.msSize);" data-ms-size="256"><img src="images/checkmark.png" class="ms-complexity-menu" style="visibility: hidden;"><u>I</u>ntermediate</li>
+                <li onclick="createGameField(+this.dataset.msSize);" data-ms-size="480"><img src="images/checkmark.png" class="ms-complexity-menu" style="visibility: hidden;"><u>E</u>xpert</li>
+                <!-- <li><img src="images/checkmark.png" alt="" style="visibility: hidden;"><u>C</u>ustom...</li> -->
+                <div class="list__separator"></div>
+                <!-- <li><img src="images/checkmark.png" alt=""><u>M</u>arks (?)</li>
+                <li><img src="images/checkmark.png" alt="">Co<u>l</u>or</li>
+                <div class="list__separator"></div>
+                <li><img src="images/checkmark.png" alt="">Best <u>T</u>imes...</li>
+                <div class="list__separator"></div> -->
+                <li onclick="closeMinesweeper()"><img src="images/checkmark.png" alt="" style="visibility: hidden;">E<u>x</u>it</li>
+            </ul>
+            <li id="g2048-info-menu" class="program__help--menu"><u>H</u>elp</li>
+        </ul>
+        <div class="sollitaire__field">
+            <div class="sollitaire__game" id="sollitaire-game">
+                <div class="sollitaire__stock">
+                </div>
+                <div class="sollitaire__waste">
+                </div>
+                <div class="sollitaire__foundations">
+                    <div class="foundation"></div>
+                    <div class="foundation"></div>
+                    <div class="foundation"></div>
+                    <div class="foundation"></div>
+                </div>
+                <div class="sollitaire__tableau">
+                    <div class="pile" id="pile-1"></div>
+                    <div class="pile" id="pile-2"></div>
+                    <div class="pile" id="pile-3"></div>
+                    <div class="pile" id="pile-4"></div>
+                    <div class="pile" id="pile-5"></div>
+                    <div class="pile" id="pile-6"></div>
+                    <div class="pile" id="pile-7"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="lumberjack__container game__container" id="lumberjack" style="display: none;">
+        <div class="lumberjack__header program__header">
+            <img src="images/lumberjack-logo.png" alt="">
+            <p>Lumberjack</p>
+            <button onclick="closeLumberjack()"><p>x</p></button>
+        </div>
+        <ul class="g2048__info program__info">
+            <li id="g2048-game-menu" class="program__game--menu"><u>G</u>ame</li>
+            <ul id="g2048-game-menu-active" class="program__game--menu--active">
+                <li onclick="minesweeperRestartGame()"><img src="images/checkmark.png" alt="" style="visibility: hidden;"><u>N</u>ew</li>
+                <div class="list__separator"></div>
+                <li onclick="createGameField(+this.dataset.msSize);" data-ms-size="64"><img src="images/checkmark.png" class="ms-complexity-menu"><u>B</u>eginner</li>
+                <li onclick="createGameField(+this.dataset.msSize);" data-ms-size="256"><img src="images/checkmark.png" class="ms-complexity-menu" style="visibility: hidden;"><u>I</u>ntermediate</li>
+                <li onclick="createGameField(+this.dataset.msSize);" data-ms-size="480"><img src="images/checkmark.png" class="ms-complexity-menu" style="visibility: hidden;"><u>E</u>xpert</li>
+                <!-- <li><img src="images/checkmark.png" alt="" style="visibility: hidden;"><u>C</u>ustom...</li> -->
+                <div class="list__separator"></div>
+                <!-- <li><img src="images/checkmark.png" alt=""><u>M</u>arks (?)</li>
+                <li><img src="images/checkmark.png" alt="">Co<u>l</u>or</li>
+                <div class="list__separator"></div>
+                <li><img src="images/checkmark.png" alt="">Best <u>T</u>imes...</li>
+                <div class="list__separator"></div> -->
+                <li onclick="closeMinesweeper()"><img src="images/checkmark.png" alt="" style="visibility: hidden;">E<u>x</u>it</li>
+            </ul>
+            <li id="g2048-info-menu" class="program__help--menu"><u>H</u>elp</li>
+        </ul>
+        <div class="lumberjack__field">
+            <div class="lumberjack__game" id="lumbejack-game">
+                    
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
